@@ -65,6 +65,8 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
       </div>
       <input
         type="number"
+        name="customAmount"
+        id="customAmount"
         min={100}
         inputMode="numeric"
         placeholder={siteContent.pay.customAmountPlaceholder}

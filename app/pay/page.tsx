@@ -18,7 +18,7 @@ export default async function PayPage({
     <main className="min-h-screen bg-brand-cream px-4 py-8">
       <div className="rounded-3xl bg-white p-6 text-brand-blue">
         <div className="flex items-center gap-3">
-          <div className="h-16 w-16 overflow-hidden rounded-full">
+          <div className="h-16 w-16 shrink-0 overflow-hidden rounded-full">
             <Image
               src={siteContent.pay.recipientPhoto}
               alt={siteContent.pay.recipientName}
