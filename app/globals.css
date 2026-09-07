@@ -4,8 +4,8 @@
   --color-brand-blue: #15328f;
   --color-brand-orange: #f2833c;
   --color-brand-cream: #f6efda;
-  --font-heading: var(--font-oswald);
-  --font-body: var(--font-nunito);
+  --font-heading: var(--font-druk);
+  --font-body: var(--font-onest);
 }
 
 body {

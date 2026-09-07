@@ -1,18 +1,27 @@
 import type { Metadata } from 'next';
-import { Oswald, Nunito } from 'next/font/google';
+import localFont from 'next/font/local';
 import './globals.css';
 import { MobileFrame } from '@/components/MobileFrame';
 
-const oswald = Oswald({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['600', '700'],
-  variable: '--font-oswald',
+const drukWide = localFont({
+  src: '../fonts/DrukWideCyrillic-Bold.otf',
+  weight: '700',
+  variable: '--font-druk',
 });
 
-const nunito = Nunito({
-  subsets: ['latin', 'cyrillic'],
-  weight: ['400', '600', '700'],
-  variable: '--font-nunito',
+const onest = localFont({
+  src: [
+    { path: '../fonts/onest/Onest-Thin.ttf', weight: '100', style: 'normal' },
+    { path: '../fonts/onest/Onest-ExtraLight.ttf', weight: '200', style: 'normal' },
+    { path: '../fonts/onest/Onest-Light.ttf', weight: '300', style: 'normal' },
+    { path: '../fonts/onest/Onest-Regular.ttf', weight: '400', style: 'normal' },
+    { path: '../fonts/onest/Onest-Medium.ttf', weight: '500', style: 'normal' },
+    { path: '../fonts/onest/Onest-SemiBold.ttf', weight: '600', style: 'normal' },
+    { path: '../fonts/onest/Onest-Bold.ttf', weight: '700', style: 'normal' },
+    { path: '../fonts/onest/Onest-ExtraBold.ttf', weight: '800', style: 'normal' },
+    { path: '../fonts/onest/Onest-Black.ttf', weight: '900', style: 'normal' },
+  ],
+  variable: '--font-onest',
 });
 
 export const metadata: Metadata = {
@@ -28,7 +37,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ru">
-      <body className={`${oswald.variable} ${nunito.variable} font-body`}>
+      <body className={`${drukWide.variable} ${onest.variable} font-body`}>
         <MobileFrame>{children}</MobileFrame>
       </body>
     </html>
