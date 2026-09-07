@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Hero } from '@/components/Hero';
 import { StoryCard } from '@/components/StoryCard';
 import { NeedsList } from '@/components/NeedsList';
+import { ContactsSection } from '@/components/ContactsSection';
 import { siteContent } from '@/content/site';
 
 export default function HomePage() {
@@ -84,6 +85,8 @@ export default function HomePage() {
         </h2>
         <StoryCard {...fundsBreakdown.card} />
       </section>
+
+      <ContactsSection />
     </main>
   );
 }
