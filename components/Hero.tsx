@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import { siteContent } from '@/content/site';
 import { formatTenge } from '@/lib/format';
+import { DonationPicker } from '@/components/DonationPicker';
 
 export function Hero() {
   const { hero } = siteContent;
@@ -53,24 +53,7 @@ export function Hero() {
         <p className="mt-3 text-sm leading-relaxed">{hero.progressCaption}</p>
       </div>
 
-      <div className="mt-4 grid grid-cols-3 gap-2">
-        {hero.quickAmounts.map((amount) => (
-          <Link
-            key={amount}
-            href={`/pay?amount=${amount}`}
-            className="rounded-full border-2 border-white px-2 py-3 text-center font-semibold"
-          >
-            {formatTenge(amount)}₸
-          </Link>
-        ))}
-      </div>
-
-      <Link
-        href="/pay"
-        className="mt-4 block rounded-full bg-brand-orange px-4 py-4 text-center font-heading text-lg uppercase text-white"
-      >
-        {hero.ctaLabel}
-      </Link>
+      <DonationPicker />
     </section>
   );
 }

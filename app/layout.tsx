@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './globals.css';
 import { MobileFrame } from '@/components/MobileFrame';
+import { StickyDonateButton } from '@/components/StickyDonateButton';
 
 const drukWide = localFont({
   src: '../fonts/DrukWideCyrillic-Bold.otf',
@@ -36,9 +37,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ru">
-      <body className={`${drukWide.variable} ${onest.variable} font-body`}>
+    <html lang="ru" className={`${drukWide.variable} ${onest.variable}`}>
+      <body className="font-body">
         <MobileFrame>{children}</MobileFrame>
+        <StickyDonateButton />
       </body>
     </html>
   );

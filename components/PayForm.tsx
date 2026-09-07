@@ -53,7 +53,7 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
             key={preset}
             type="button"
             onClick={() => handlePreset(preset)}
-            className={`rounded-2xl border-2 px-3 py-4 text-center font-semibold ${
+            className={`rounded-full border-2 px-3 py-4 text-center text-sm font-semibold ${
               amount === preset && customValue === ''
                 ? 'border-brand-orange bg-brand-orange text-white'
                 : 'border-brand-blue/20 text-brand-blue'
@@ -72,13 +72,13 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
         placeholder={siteContent.pay.customAmountPlaceholder}
         value={customValue}
         onChange={(event) => handleCustomChange(event.target.value)}
-        className="mt-3 w-full rounded-2xl border-2 border-brand-blue/20 px-4 py-3 text-brand-blue"
+        className="mt-3 w-full rounded-full border-2 border-brand-blue/20 px-4 py-3 text-brand-blue"
       />
       <button
         type="button"
         onClick={handleSubmit}
         disabled={isSubmitting || amount <= 0}
-        className="mt-4 w-full rounded-full bg-brand-orange px-4 py-4 text-center font-heading text-lg uppercase text-white disabled:opacity-60"
+        className="mt-4 w-full rounded-full bg-brand-orange px-4 py-4 text-center font-body font-semibold text-base uppercase text-white disabled:opacity-60"
       >
         {siteContent.pay.ctaPrefix} {formatTenge(amount)}₸
       </button>

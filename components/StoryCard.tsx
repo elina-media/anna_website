@@ -18,7 +18,7 @@ export function StoryCard({
   return (
     <div className={`rounded-3xl p-6 ${variantClasses[variant]}`}>
       {heading ? (
-        <h3 className="mb-3 font-heading text-2xl uppercase leading-tight">
+        <h3 className="mb-3 font-heading text-lg uppercase leading-tight">
           {heading}
         </h3>
       ) : null}
