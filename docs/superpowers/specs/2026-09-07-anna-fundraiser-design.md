@@ -58,7 +58,8 @@ Full page copy (Russian), section by section, top to bottom:
   животные были в безопасности.\n\nВпереди зима. Без тёплого дома животным будет очень
   тяжело пережить морозы. Несмотря на всё это, я не перестала спасать. Потому что не могу
   иначе. Каждый день появляются новые животные, которым нужна помощь."
-- Photo: Anna in front of the burned brick wall (close-up).
+- Photo: Anna in front of the burned brick wall (close-up) — same source file as the
+  hero photo, see Media Assets note under Architecture.
 - Card "СЕЙЧАС НАМ ЖИЗНЕННО НЕОБХОДИМА...": "поддержка, чтобы восстановить дом для нас и
   наших животных, а также построить вольеры для собак. Это позволит принять больше
   спасённых животных и уберечь их от отлова, где для многих бездомных собак всё
@@ -68,9 +69,10 @@ Full page copy (Russian), section by section, top to bottom:
 
 ### 4. Новый приют
 - Section heading "НОВЫЙ ПРИЮТ" with paw-print decoration.
-- Photo: sunset over an empty field (the new plot).
 - Embedded video 2: `4-video_wG446RF1.mp4`
   (`https://static.tildacdn.pro/vide3931-3438-4631-a339-343338306161/4-video_wG446RF1.mp4`)
+  — its first frame is a sunset-over-empty-field shot of the new plot; there is no
+  separate still photo here (see Media Assets note under Architecture).
 - Blue card "МЫ НАЧИНАЕМ ВСЁ С НУЛЯ. НАМ НУЖНА ВАША ПОМОЩЬ ❤️": "Нас дважды поджигали.
   Наших собак и кошек травили. Соседи жаловались в акимат и просили вызвать отлов, убить
   собак.\n\nМы поняли, что больше не можем оставаться там, где каждый день существует
@@ -160,24 +162,31 @@ code.
 - **Content:** all copy from the section above lives in one typed data file,
   `content/site.ts` (headings, paragraphs, stats, needs list, contact info, requisites,
   media file names). Components read from it — no copy hardcoded in JSX.
-- **Media:** hero/story photos and the two video clips are downloaded from the Tilda CDN
-  into `public/images/` and `public/videos/`. Source assets identified on the live page
-  (`https://heelpanna.tilda.ws/`):
-  - Photos (served via `optim.tildacdn.pro` with `/-/resize/` or `/-/cover/` params —
-    strip those params or request a larger width to get full resolution):
-    `tild3335-3064-4132-a539-323634393161/3.png` (Anna in front of burned house, hero),
-    `tild3635-3564-4737-b039-633337393431/photo.png` (Anna in pink cap with black dog),
-    `tild3266-6565-4065-a261-316439656638/_0_1.png` (Anna with puppy at vet clinic),
-    `tild6130-3936-4264-b230-663833303332/ed.png` (sunset over empty field),
-    `tild3035-6634-4664-b162-343961323966/magnific_img1_s7geFS.png` (close-up at burned
-    wall), `tild3037-3163-4937-a633-626530636639/32.png`,
-    `tild3564-3062-4934-a231-393365366338/IMG-20260730-WA0187.jpg`.
-  - Videos (full quality, `static.tildacdn.pro`):
-    `vide6263-6337-4666-a632-356238386331/vid-20260730-wa0315_.mp4` (news clip about the
-    fire), `vide3931-3438-4631-a339-343338306161/4-video_wG446RF1.mp4` (second clip, new
-    plot).
-  - If any of these don't resolve at full quality, re-scrape the live site rather than
-    guessing — Tilda's asset hashes are opaque and not guessable.
+- **Media:** downloaded directly (already verified by fetching each URL and visually
+  inspecting the bytes — these are confirmed, not guessed) from `static.tildacdn.pro`
+  into `public/images/` and `public/videos/`. The raw page HTML only ever references 3
+  unique content photos, 2 videos, and a handful of decorative/icon graphics we don't
+  need (a paw-print trail, two paw close-ups, a bone illustration — cosmetic flourishes,
+  skipped per YAGNI):
+  - `https://static.tildacdn.pro/tild3035-6634-4664-b162-343961323966/magnific_img1_s7geFS.png`
+    (1024x1024) — Anna in front of the burned house. This is the **hero photo**, and it
+    is reused as-is for the "burned wall" photo in the fire-news section (it's the same
+    image on the source site, just cropped differently via CSS `background-size:cover`
+    in one spot — we don't need two files for that, one `<Image>` with `object-cover`
+    handles both placements).
+  - `https://static.tildacdn.pro/tild3564-3062-4934-a231-393365366338/IMG-20260730-WA0187.jpg`
+    (1080x1379) — Anna in a pink cap with a black dog. Used in "Обо мне" (photo 1).
+  - `https://static.tildacdn.pro/tild3037-3163-4937-a633-626530636639/32.png` (738x738) —
+    Anna holding a puppy at a vet clinic. Used in "Обо мне" (photo 2).
+  - `https://static.tildacdn.pro/vide6263-6337-4666-a632-356238386331/vid-20260730-wa0315_.mp4`
+    (2.2 MB) — the news clip about the fire, used in the fire-news section.
+  - `https://static.tildacdn.pro/vide3931-3438-4631-a339-343338306161/4-video_wG446RF1.mp4`
+    (5.1 MB) — the second clip (empty plot / new land), used in "Новый приют". There is
+    no separate "sunset field" still photo — the source site shows this video itself at
+    that spot; its first frame reads as a sunset-over-a-field shot, which is why earlier,
+    lower-fidelity research (whole-page screenshots) misread it as a static image. Render
+    it as a `<video>` and it reproduces the same look.
+  - No further asset hunting needed — this list is exhaustive and confirmed.
 - **Payment integration seam:** `lib/payment.ts` exports
   `createKaspiPayLink(amountTenge: number): Promise<string | null>`. Current
   implementation is a stub that returns `null` (not configured). The `/pay` page calls
