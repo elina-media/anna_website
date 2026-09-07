@@ -41,6 +41,7 @@ export const siteContent = {
   },
 
   about: {
+    heading: 'Обо мне',
     photo1: '/images/anna-pink-cap-dog.jpg',
     card1: {
       variant: 'blue',
@@ -175,5 +176,11 @@ export const siteContent = {
     heading: 'РЕКВИЗИТЫ ДЛЯ ПЕРЕВОДА',
     subheading: 'Сделайте перевод через Kaspi или другой банк',
     rows: requisites,
+  },
+
+  ui: {
+    copyButtonLabel: 'Копировать',
+    copyButtonCopiedLabel: 'Скопировано',
+    copyButtonAriaLabelPrefix: 'Скопировать',
   },
 } as const;

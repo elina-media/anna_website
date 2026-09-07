@@ -14,7 +14,7 @@ export default function HomePage() {
 
       <section className="space-y-6 bg-brand-cream px-4 py-8">
         <h2 className="text-center font-heading text-2xl uppercase text-brand-blue">
-          Обо мне
+          {about.heading}
         </h2>
         <div className="overflow-hidden rounded-3xl">
           <Image

@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { copyToClipboard } from '@/lib/clipboard';
+import { siteContent } from '@/content/site';
 
 export function CopyField({ label, value }: { label: string; value: string }) {
   const [copied, setCopied] = useState(false);
@@ -24,9 +25,9 @@ export function CopyField({ label, value }: { label: string; value: string }) {
         type="button"
         onClick={handleCopy}
         className="rounded-full bg-brand-blue px-3 py-2 text-sm text-white"
-        aria-label={`Скопировать ${label}`}
+        aria-label={`${siteContent.ui.copyButtonAriaLabelPrefix} ${label}`}
       >
-        {copied ? 'Скопировано' : 'Копировать'}
+        {copied ? siteContent.ui.copyButtonCopiedLabel : siteContent.ui.copyButtonLabel}
       </button>
     </div>
   );
