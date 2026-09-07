@@ -36,9 +36,7 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
         window.location.href = url;
         return;
       }
-      setNotice(
-        'Оплата через Kaspi пока настраивается. Переведите, пожалуйста, по реквизитам ниже.'
-      );
+      setNotice(siteContent.pay.fallbackNotice);
     } finally {
       setIsSubmitting(false);
     }
@@ -47,7 +45,7 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
   return (
     <div>
       <p className="mb-2 text-sm font-semibold uppercase opacity-70">
-        Сумма пожертвования
+        {siteContent.pay.amountLabel}
       </p>
       <div className="grid grid-cols-2 gap-3">
         {siteContent.pay.presetAmounts.map((preset) => (
@@ -69,7 +67,7 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
         type="number"
         min={100}
         inputMode="numeric"
-        placeholder="Другая сумма"
+        placeholder={siteContent.pay.customAmountPlaceholder}
         value={customValue}
         onChange={(event) => handleCustomChange(event.target.value)}
         className="mt-3 w-full rounded-2xl border-2 border-brand-blue/20 px-4 py-3 text-brand-blue"
@@ -80,7 +78,7 @@ export function PayForm({ initialAmount }: { initialAmount: number }) {
         disabled={isSubmitting || amount <= 0}
         className="mt-4 w-full rounded-full bg-brand-orange px-4 py-4 text-center font-heading text-lg uppercase text-white disabled:opacity-60"
       >
-        Помочь на {formatTenge(amount)}₸
+        {siteContent.pay.ctaPrefix} {formatTenge(amount)}₸
       </button>
       {notice ? (
         <p className="mt-3 text-sm leading-relaxed text-brand-blue">{notice}</p>

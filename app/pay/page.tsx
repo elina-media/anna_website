@@ -29,7 +29,7 @@ export default async function PayPage({
           </div>
           <div>
             <h1 className="font-heading text-xl uppercase">
-              Помочь {siteContent.pay.recipientName}
+              {siteContent.pay.headingPrefix} {siteContent.pay.recipientName}
             </h1>
             <p className="text-sm leading-snug opacity-70">
               {siteContent.pay.description}

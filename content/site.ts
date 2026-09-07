@@ -36,6 +36,8 @@ export const siteContent = {
       'Каждый человек может повлиять чтобы эта шкала заполнилась. Это шансы на жизнь питомцев',
     quickAmounts: [3000, 5000, 10000],
     ctaLabel: 'ПОМОЧЬ ЧЕРЕЗ KASPI',
+    raisedLabel: 'Собрано',
+    goalLabel: 'Цель:',
   },
 
   about: {
@@ -161,6 +163,12 @@ export const siteContent = {
     presetAmounts: [1000, 5000, 10000, 25000],
     defaultAmount: 5000,
     noKaspiText: 'Нет Kaspi? Перевести по реквизитам',
+    fallbackNotice:
+      'Оплата через Kaspi пока настраивается. Переведите, пожалуйста, по реквизитам ниже.',
+    amountLabel: 'Сумма пожертвования',
+    customAmountPlaceholder: 'Другая сумма',
+    ctaPrefix: 'Помочь на',
+    headingPrefix: 'Помочь',
   },
 
   requisitesPage: {

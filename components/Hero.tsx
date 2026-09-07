@@ -34,7 +34,7 @@ export function Hero() {
       <div className="mt-6 rounded-3xl bg-white p-4 text-brand-blue">
         <div className="flex items-start justify-between">
           <div>
-            <div className="text-sm uppercase opacity-70">Собрано</div>
+            <div className="text-sm uppercase opacity-70">{hero.raisedLabel}</div>
             <div className="font-heading text-xl">
               {formatTenge(hero.raisedTenge)}₸
             </div>
@@ -42,7 +42,7 @@ export function Hero() {
           <div className="text-sm opacity-70">{hero.date}</div>
         </div>
         <div className="mt-2 text-sm uppercase opacity-70">
-          Цель: {formatTenge(hero.goalTenge)}₸
+          {hero.goalLabel} {formatTenge(hero.goalTenge)}₸
         </div>
         <div className="mt-2 h-3 w-full overflow-hidden rounded-full bg-brand-cream">
           <div
