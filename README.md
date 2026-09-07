@@ -2,8 +2,6 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
-**Note:** run `npm install --legacy-peer-deps` (not plain `npm install`) — `vitest`'s peer `@types/node` range conflicts with the version Next.js pins. `npm ci` (used by CI/deploy) is unaffected.
-
 First, run the development server:
 
 ```bash
