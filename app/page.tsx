@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import { Hero } from '@/components/Hero';
 import { StoryCard } from '@/components/StoryCard';
+import { NeedsList } from '@/components/NeedsList';
 import { siteContent } from '@/content/site';
 
 export default function HomePage() {
-  const { about, fireNews } = siteContent;
+  const { about, fireNews, newShelter, fundsBreakdown } = siteContent;
 
   return (
     <main>
@@ -54,6 +55,34 @@ export default function HomePage() {
           />
         </div>
         <StoryCard {...fireNews.card2} />
+      </section>
+
+      <section className="space-y-6 bg-brand-cream px-4 py-8">
+        <h2 className="text-center font-heading text-2xl uppercase text-brand-blue">
+          {newShelter.heading}
+        </h2>
+        <video
+          className="w-full rounded-3xl"
+          controls
+          playsInline
+          src={newShelter.video}
+        />
+        <StoryCard {...newShelter.card1} />
+        <div className="rounded-3xl bg-white p-6 text-brand-blue">
+          <h3 className="mb-3 font-heading text-xl uppercase leading-tight">
+            {newShelter.needsHeading}
+          </h3>
+          <NeedsList items={newShelter.needs} />
+          <p className="mt-4 font-semibold">{newShelter.needsGoalText}</p>
+        </div>
+        <StoryCard {...newShelter.card2} />
+      </section>
+
+      <section className="space-y-6 bg-brand-cream px-4 py-8">
+        <h2 className="text-center font-heading text-2xl uppercase text-brand-blue">
+          {fundsBreakdown.heading}
+        </h2>
+        <StoryCard {...fundsBreakdown.card} />
       </section>
     </main>
   );
