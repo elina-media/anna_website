@@ -51,7 +51,7 @@ export function CopyField({ label, value }: { label: string; value: string }) {
   }
 
   return (
-    <div className="flex items-center justify-between rounded-2xl bg-white px-4 py-3 text-brand-blue">
+    <div className="flex items-center justify-between rounded-2xl border-2 border-brand-blue/15 bg-white px-4 py-3 text-brand-blue">
       <div>
         <div className="text-sm opacity-70">{label}</div>
         <div className="font-semibold">{value}</div>

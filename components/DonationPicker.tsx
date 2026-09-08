@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { siteContent } from '@/content/site';
 import { formatTenge } from '@/lib/format';
+import { createKaspiPayLink } from '@/lib/payment';
 
 function HeartIcon() {
   return (
@@ -23,11 +24,14 @@ export function DonationPicker() {
   const [amount, setAmount] = useState<number>(hero.quickAmounts[0]);
   const [customValue, setCustomValue] = useState('');
   const [showCustom, setShowCustom] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [notice, setNotice] = useState<string | null>(null);
 
   function handlePreset(preset: number) {
     setAmount(preset);
     setCustomValue('');
     setShowCustom(false);
+    setNotice(null);
   }
 
   function handleCustomChange(value: string) {
@@ -35,6 +39,22 @@ export function DonationPicker() {
     const parsed = Number(value);
     if (Number.isFinite(parsed) && parsed > 0) {
       setAmount(Math.round(parsed));
+      setNotice(null);
+    }
+  }
+
+  async function handleSubmit() {
+    setIsSubmitting(true);
+    setNotice(null);
+    try {
+      const url = await createKaspiPayLink(amount);
+      if (url) {
+        window.location.href = url;
+        return;
+      }
+      setNotice(pay.fallbackNotice);
+    } finally {
+      setIsSubmitting(false);
     }
   }
 
@@ -46,7 +66,7 @@ export function DonationPicker() {
             key={preset}
             type="button"
             onClick={() => handlePreset(preset)}
-            className={`rounded-full border-2 px-1 py-2.5 text-center text-xs font-semibold whitespace-nowrap ${
+            className={`rounded-full border-2 px-1 py-1.5 text-center text-xs font-semibold whitespace-nowrap ${
               amount === preset && !showCustom
                 ? 'border-brand-orange bg-brand-orange text-white'
                 : 'border-white text-white'
@@ -58,7 +78,7 @@ export function DonationPicker() {
         <button
           type="button"
           onClick={() => setShowCustom(true)}
-          className={`rounded-full border-2 px-1 py-2.5 text-center text-xs leading-tight font-semibold ${
+          className={`rounded-full border-2 px-1 py-1.5 text-center text-xs leading-tight font-semibold ${
             showCustom
               ? 'border-brand-orange bg-brand-orange text-white'
               : 'border-white text-white'
@@ -81,13 +101,24 @@ export function DonationPicker() {
         />
       ) : null}
 
-      <Link
-        href={`/pay?amount=${amount}`}
-        className="mt-4 flex items-center justify-center gap-2 rounded-full bg-brand-orange px-4 py-4 text-center font-body font-semibold text-base uppercase text-white"
+      <button
+        type="button"
+        onClick={handleSubmit}
+        disabled={isSubmitting || amount <= 0}
+        className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-brand-orange px-4 py-4 text-center font-body font-semibold text-base uppercase text-white disabled:opacity-60"
       >
         <HeartIcon />
         {pay.headingPrefix} {pay.recipientName} · {formatTenge(amount)}₸
-      </Link>
+      </button>
+
+      {notice ? (
+        <div className="mt-3 text-center text-sm leading-relaxed text-white">
+          <p>{notice}</p>
+          <Link href="/requisites" className="mt-1 inline-block font-semibold underline">
+            {pay.noKaspiText}
+          </Link>
+        </div>
+      ) : null}
     </div>
   );
 }
